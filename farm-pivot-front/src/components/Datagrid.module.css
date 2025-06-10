@@ -1,0 +1,40 @@
+.dataGrid {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.dataGrid td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.dataGrid th {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1010px) {
+  .dataGrid {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dataGrid th,
+  .dataGrid td {
+    white-space: nowrap;
+  }
+}

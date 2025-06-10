@@ -1,0 +1,99 @@
+.container {
+  padding: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.farm_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.createButton {
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: var(--mint-2);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 176px;
+  height: 60px;
+}
+
+.createButton:hover {
+  background-color: var(--dartmouth-green);
+  transform: translateY(-4px);
+}
+
+.status {
+  font-weight: bold;
+  border-radius: 0.375rem;
+  display: inline-block;
+  text-align: center;
+  min-width: 60px;
+}
+
+.statusOn {
+  color: var(--green);
+}
+
+.statusOff {
+  color: var(--red);
+  width: auto;
+}
+
+.ligado {
+  background-color: var(--green);
+  color: white;
+}
+
+.ligado:hover {
+  background-color: var(--dartmouth-green);
+  color: white;
+}
+
+.desligado {
+  background-color: var(--red);
+  color: white;
+}
+
+.desligado:hover {
+  background-color: var(--dark-red);
+}
+
+.createPivot {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: var(--mint-2);
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.createPivot:hover {
+  background-color: var(--dartmouth-green);
+}
+
+.confirm {
+  margin-Top: 1rem;
+}
+
+.cancel {
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  farms    Farm[]
+}
+
+model Farm {
+  id     Int     @id @default(autoincrement())
+  name   String
+  user   User    @relation(fields: [userId], references: [id])
+  userId Int
+  pivots Pivot[]
+}
+
+model Pivot {
+  id        Int    @id @default(autoincrement())
+  name      String
+  status    String
+  direction String
+  speed     Float
+  pressure  Float
+
+  farm    Farm                 @relation(fields: [farmId], references: [id])
+  farmId  Int
+  history PivotStatusHistory[]
+}
+
+model PivotStatusHistory {
+  id        Int      @id @default(autoincrement())
+  status    String
+  direction String
+  speed     Float
+  pressure  Float
+  timestamp DateTime @default(now())
+
+  pivot   Pivot @relation(fields: [pivotId], references: [id], onDelete: Cascade)
+  pivotId Int
+}

@@ -1,0 +1,5 @@
+{
+  "plugins": ["@prisma/prettier-plugin"],
+  "singleQuote": true,
+  "trailingComma": "all"
+}

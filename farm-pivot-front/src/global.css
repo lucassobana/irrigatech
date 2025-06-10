@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+:root {
+    --green: #46be3f;
+    --red: #f44336;
+
+    --nyanza: #d8f3dc;
+    --celadon: #b7e4c7;
+    --celadon-2: #95d5b2;
+    --mint: #74c69d;
+    --mint-2: #90a955;
+    --sea-green: #9CBB57;
+    --dartmouth-green: #4f772d;
+    --dark-green: #283617;
+    --dark-red: #86302a;
+
+    font-family: "Montserrat", sans-serif;
+}
