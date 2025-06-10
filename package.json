@@ -1,0 +1,13 @@
+{
+  "name": "irrigatech",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix farm-pivot-api\" \"npm run dev --prefix farm-pivot-front\"",
+    "dev:farm-pivot-api": "npm run dev --prefix farm-pivot-api",
+    "dev:farm-pivot-front": "npm run dev --prefix farm-pivot-front"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
