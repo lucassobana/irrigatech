@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { io } from 'socket.io-client';
 
 import { FarmCard } from "../../components/FarmCard";
 import { Datagrid, type Column } from "../../components/Datagrid";
@@ -30,6 +31,12 @@ interface User {
   id: number;
   name: string;
 }
+
+interface Update {
+  pivotId: number;
+  status: string;
+}
+
 
 export const FarmList = () => {
   const [farms, setFarms] = useState<Farm[]>([]);
@@ -77,14 +84,18 @@ export const FarmList = () => {
   }, []);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:3000/ws");
+    const socket = io('http://localhost:3001', {
+      transports: ['websocket'], // força usar websocket
+    });
 
-    ws.onmessage = (event) => {
-      const updates: { pivotId: number; status: string }[] = JSON.parse(event.data);
+    socket.on('connect', () => {
+      console.log('Conectado ao Socket.IO');
+    });
 
+    socket.on('statusUpdate', (updates: Update[]) => {
       setPivotStatus((prev) => {
         const next = { ...prev };
-        updates.forEach(({ pivotId, status }) => {
+        updates.forEach(({ pivotId, status }: Update) => {
           next[pivotId] = status;
         });
         return next;
@@ -93,15 +104,21 @@ export const FarmList = () => {
       setFarms((prevFarms) => {
         return prevFarms.map(farm => {
           const updatedPivots = farm.pivots.map(pivot => {
-            const update = updates.find(u => u.pivotId === pivot.id);
+            const update = updates.find((u: Update) => u.pivotId === pivot.id);
             return update ? { ...pivot, status: update.status } : pivot;
           });
           return { ...farm, pivots: updatedPivots };
         });
       });
-    };
+    });
 
-    return () => ws.close();
+    socket.on('disconnect', () => {
+      console.log('Desconectado do Socket.IO');
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const columns: Column<Pivot>[] = [

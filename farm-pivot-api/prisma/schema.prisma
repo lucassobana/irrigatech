@@ -52,3 +52,10 @@ model PivotStatusHistory {
   pivot   Pivot @relation(fields: [pivotId], references: [id], onDelete: Cascade)
   pivotId Int
 }
+
+model EquipmentStatus {
+  id        String   @id @default(uuid())
+  deviceId  String
+  status    String
+  updatedAt DateTime @updatedAt
+}
